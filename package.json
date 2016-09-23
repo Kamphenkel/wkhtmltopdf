@@ -1,0 +1,26 @@
+{
+  "name": "wkhtmltopdfWrapper",
+  "version": "1.0.1",
+  "description": "a simple wrapper for wkhtmltopdf/wkhtmltoimage",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YueHui/wkhtmltopdf.git"
+  },
+  "keywords": [
+    "wkhtmltopdf",
+    "wkhtmltoimage",
+    "html",
+    "to",
+    "pdf"
+  ],
+  "author": "KongYuehui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YueHui/wkhtmltopdf/issues"
+  },
+  "homepage": "https://github.com/YueHui/wkhtmltopdf#readme"
+}
