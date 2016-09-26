@@ -1,18 +1,16 @@
 'use strict';
 
-let childprocess = require('child_process');
+let main = require('./lib/main');
 
-module.exports = function(content,options){
-	if(!content){
-		console.error("the html url/content is null");
-		return;
-	}
+let wkhtmltopdf = function(content,destination,args){
+	main("pdf",content,destination,args);
+}
 
-	let parameterArray = [];
-	for(let i in options){
-		parameterArray.push(i);
-		parameterArray.push(options[i]);
-	}
+let wkhtmltoimage = function(content,destination,args){
+	main("image",content,destination,args);
+}
 
-	childprocess.spawn("wkhtmltopdf",parameterArray)
+module.exports = {
+	topdf:wkhtmltopdf,
+	toimage:wkhtmltoimage
 }
