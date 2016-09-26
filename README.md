@@ -1,4 +1,9 @@
 # wkhtmltopdf
+
+
+[![Build Status](https://travis-ci.org/YueHui/wkhtmltopdf.svg?branch=master)](https://travis-ci.org/YueHui/wkhtmltopdf)
+
+
 需要系统环境安装wkhtmltopdf，并添加到系统变量
 
 
