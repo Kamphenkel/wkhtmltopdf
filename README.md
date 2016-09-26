@@ -25,3 +25,5 @@ wrapper.toimage("http://www.baidu.com","./1.jpg",{
 	"quality":"90"
 })
 ```
+
+具体参数可访问[wkhtmltopdf](http://wkhtmltopdf.org/index.html)官网查看
