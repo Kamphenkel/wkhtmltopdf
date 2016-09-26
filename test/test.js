@@ -1,5 +1,9 @@
-var wkhtmltopdf = require("../index");
+var wrapper = require("../index");
 
-wkhtmltopdf.topdf("http://www.qq.com","./1.pdf",{
-	"page-size":"A3"
+// wrapper.topdf("http://www.qq.com","./1.pdf",{
+// 	"page-size":"A3"
+// })
+
+wrapper.toimage("http://www.baidu.com","./1.jpg",{
+	"quality":"90"
 })
