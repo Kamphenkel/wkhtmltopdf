@@ -1,11 +1,6 @@
 # wkhtmltopdf
 
-
-[![Build Status](https://travis-ci.org/YueHui/wkhtmltopdf.svg?branch=master)](https://travis-ci.org/YueHui/wkhtmltopdf)
-
-
-需要系统环境安装wkhtmltopdf，并添加到系统变量
-
+fork of https://github.com/YueHui/wkhtmltopdf with promise support
 
 Example:
 
@@ -31,4 +26,4 @@ wrapper.toimage("http://www.baidu.com","./1.jpg",{
 })
 ```
 
-具体参数可访问[wkhtmltopdf](http://wkhtmltopdf.org/index.html)官网查看
+[wkhtmltopdf](http://wkhtmltopdf.org/index.html)
