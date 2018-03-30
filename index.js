@@ -22,12 +22,14 @@ function convert (type, source, destination, args) {
 
 		let options = [].concat(args).filter(v => !!v);
 
+		if (!source.match(/^(file|http|https):\/\//, '')) {
+			source = 'file://'+source;
+		}
+
 		options.push(source);
 		options.push(destination);
 
-
 		let promise;
-
 		switch (type) {
 			case "pdf":
 				promise = pspawn(wkhtmltopdf, options, { capture: [ 'stderr' ], shell: true});
@@ -36,7 +38,6 @@ function convert (type, source, destination, args) {
 				promise = pspawn(wkhtmltoimage, options, { capture: [ 'stderr' ], shell: true});
 				break;
 		}
-
 
 		promise.then(resolve).catch(reject);
 	});

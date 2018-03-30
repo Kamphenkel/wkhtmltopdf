@@ -83,7 +83,7 @@ describe('wkhtmltox-promise', function(){
 		let source = path.resolve(__dirname, 'in.html');
 		let dest = path.resolve(__dirname, 'out.pdf');
 
-		let result = await convert.pdf('file://'+source, dest)
+		let result = await convert.pdf(source, dest)
 			.catch(e => {
 				throw new Error(e.message, e.stderr);
 			});
@@ -98,7 +98,7 @@ describe('wkhtmltox-promise', function(){
 		let source = path.resolve(__dirname, 'in.html');
 		let dest = path.resolve(__dirname, 'out.png');
 
-		let result = await convert.image('file://'+source, dest)
+		let result = await convert.image(source, dest)
 			.catch(e => {
 				throw new Error(e.message, e.stderr);
 			});
@@ -119,7 +119,7 @@ describe('wkhtmltox-promise', function(){
 		];
 
 		try {
-			let result = await convert.pdf('file://'+source, dest, args);
+			let result = await convert.pdf(source, dest, args);
 
 			expect(result)
 				.to.exist.and
