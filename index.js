@@ -62,6 +62,7 @@ function convert (type, source, destination, args, ignore) {
 
 		promise.then(resolve)
 			.catch(err => {
+				console.warn(err.stderr);
 				if (ignoreErrorsList.some(msg => err.stderr.includes(msg))) {
 					return resolve(err.childProcess);
 				}

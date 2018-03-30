@@ -12,7 +12,7 @@ npm i wkhtmltox-promise
 	pdf(source, dest, options)
 		returns Promise
 
-	image(source, dest, options)
+	image(source, dest, options[, ignore])
 		returns Promise
 
 source = any valid URI
@@ -21,6 +21,11 @@ dest = any valid URI
 
 options = (optional*) array of arguments passed to wkhtmltopdf / wkhtmltoimage
 > see [https://wkhtmltopdf.org/usage/wkhtmltopdf.txt] for details.
+
+ignore = (optional*) array( or object of keys) of errors, or string error to ignore in the child.  If
+the substring in the childs stderr, the promise will resolve anyway.  This feature is intended to
+support some wkhtmltox errors that don't prevent the pdf generation from succeeding, but nonetheless
+report an exit status > 0 and would otherwise reject.
 
 ## Examples:
 
@@ -48,6 +53,20 @@ convert.image("http://www.google.com", "out.png")
 		var stdout = result.stdout;
         console.log('stdout: ', stdout);
 		// do something with out.png
+    })
+    .catch(function (err) {
+        console.error('ERROR: ', err, err.stderr);
+    });
+```
+Ignoring errors
+```javascript
+const convert = require("wkhtmltox-promise");
+
+convert.pdf("http://www.google.com", "out.png", ['--quiet'], ['UnknownContentError'])
+	.then(result => {
+		var stdout = result.stdout;
+        console.log('stdout: ', stdout);
+		// do something with out.pdf
     })
     .catch(function (err) {
         console.error('ERROR: ', err, err.stderr);
