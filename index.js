@@ -6,7 +6,28 @@ const pspawn = require('child-process-promise').spawn;
 const wkhtmltopdf = path.resolve(__dirname, '.bin', 'wkhtmltox', 'bin', 'wkhtmltopdf');
 const wkhtmltoimage = path.resolve(__dirname, '.bin', 'wkhtmltox', 'bin', 'wkhtmltoimage');
 
-function convert (type, source, destination, args) {
+function convert (type, source, destination, args, ignore) {
+
+	const ignoreErrorsList = [];
+
+	function setIgnore(message) {
+		if (typeof message === 'string' && message) {
+			ignoreErrorsList.push(message);
+		}
+	}
+
+	if (typeof ignore === 'string') {
+		setIgnore(ignore);
+	}
+
+	if (typeof ignore === 'object' && ignore) {
+		ignore.entries(([key, val]) => !!val && setIgnore(key));
+	}
+
+	if (Array.isArray(ignore)) {
+		ignore.map(setIgnore);
+	}
+
 	return new Promise(function(resolve, reject) {
 		if (!type || !["pdf","image"].includes(type)){
 			return reject(new Error("A conversion type must one of ['pdf', 'image']!"));
@@ -39,15 +60,23 @@ function convert (type, source, destination, args) {
 				break;
 		}
 
-		promise.then(resolve).catch(reject);
+		promise.then(resolve)
+			.catch(err => {
+				if (ignoreErrorsList.some(msg => err.stderr.includes(msg))) {
+					return resolve(err.childProcess);
+				}
+				reject(err);
+			});
 	});
 }
 
-module.exports = {
-	pdf: (content,destination,args) => {
-		return convert("pdf",content,destination,args);
+const api = {
+	pdf: (content,destination,args,ignore) => {
+		return convert("pdf",content,destination,args,ignore);
 	},
-	image: (content,destination,args) => {
-		return convert("image",content,destination,args);
+	image: (content,destination,args,ignore) => {
+		return convert("image",content,destination,args,ignore);
 	}
 };
+
+module.exports = Object.freeze(api);

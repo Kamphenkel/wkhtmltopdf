@@ -108,7 +108,20 @@ describe('wkhtmltox-promise', function(){
 			.to.be.an('object').and
 			.not.to.be.null;
 	});
+it('creates a pdf', async function() {
+		let source = path.resolve(__dirname, 'in.html');
+		let dest = path.resolve(__dirname, 'out.pdf');
 
+		let result = await convert.pdf(source, dest)
+			.catch(e => {
+				throw new Error(e.message, e.stderr);
+			});
+
+		expect(result)
+			.to.exist.and
+			.to.be.an('object').and
+			.not.to.be.null;
+	});
 	it('creates a pdf using footer html', async function() {
 		let ftr = path.resolve(__dirname, 'foot.html');
 		let source = path.resolve(__dirname, 'in.html');
@@ -131,4 +144,18 @@ describe('wkhtmltox-promise', function(){
 		}
 	});
 
+	it('ignores some stderr errors', async function() {
+		let source = path.resolve(__dirname, 'err-in.html');
+		let dest = path.resolve(__dirname, 'out.pdf');
+
+		let result = await convert.pdf(source, dest, null, 'ContentNotFoundError')
+			.catch(e => {
+				throw new Error(e.message, e.stderr);
+			});
+
+		expect(result)
+			.to.exist.and
+			.to.be.an('object').and
+			.not.to.be.null;
+	});
 });
