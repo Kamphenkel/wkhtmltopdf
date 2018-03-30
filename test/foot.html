@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<script>
+			function subst() {
+
+				var params = ['page', 'frompage', 'topage', 'webpage', 'section', 'subsection', 'date', 'isodate', 'time', 'title', 'doctitle', 'sitepage', 'sitepages'];
+
+				function getParameterByName(name) {
+					var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+					return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+				}
+
+				function substitute(name) {
+					var value = getParameterByName(name);
+					var elements = document.getElementsByClassName(name);
+
+					for (var i = 0; elements && i < elements.length; i++) {
+						elements[i].textContent = value;
+					}
+				}
+
+				params.forEach(function(param) {
+					substitute(param);
+				});
+			}
+		</script>
+		<style>
+			.left {
+				float: left;
+			}
+			.right {
+				float: right;
+			}
+			footer {
+				text-align: center;
+				width: 100%;
+			}
+			html {
+				color: #555;
+				font-family: sans-serif;
+			}
+		</style>
+	</head>
+	<body style="border:0; margin: 0;" onload="subst()">
+		<footer>
+			<span class="left"><span class="date"></span></span><span class="right">page <span class="page">0</span> of <span class="topage">0</span></span>
+		</footer>
+	</body>
+</html>

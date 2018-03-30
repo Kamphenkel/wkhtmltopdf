@@ -1,0 +1,16 @@
+.bin
+.node_env
+lib-cov
+*.log
+*.out
+*.pid
+*.gz
+*.komodoproject
+*.sublime-project
+*.sublime-workspace
+.snyk
+pids
+logs
+.komodotools
+node_modules
+npm-debug.log
