@@ -153,6 +153,11 @@ it('creates a pdf', async function() {
 				throw new Error(e.message, e.stderr);
 			});
 
+		result = await convert.pdf(source, dest, null, [ 'UnknownContentError', 'ContentNotFoundError' ])
+			.catch(e => {
+				throw new Error(e.message, e.stderr);
+			});
+
 		expect(result)
 			.to.exist.and
 			.to.be.an('object').and
