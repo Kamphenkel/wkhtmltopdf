@@ -3,11 +3,11 @@
 A simple wrapper for wkhtmltopdf/wkhtmltoimage for ES 2016/2017 using promises.   Downloads
 and installs the latest wkhtmtopdf lib (0.12.4) on linux.
 
-##Installation:
+## Installation:
 
 npm i wkhtmltox-promise
 
-##API:
+## API:
 
 	pdf(source, dest, options)
 		returns Promise
@@ -22,7 +22,7 @@ dest = any valid URI
 options = (optional*) array of arguments passed to wkhtmltopdf / wkhtmltoimage
 > see [https://wkhtmltopdf.org/usage/wkhtmltopdf.txt] for details.
 
-##Examples:
+## Examples:
 
 PDF
 ```javascript
