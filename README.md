@@ -1,29 +1,57 @@
-# wkhtmltopdf
+# wkhtmltox-promise
 
-fork of https://github.com/YueHui/wkhtmltopdf with promise support
+A simple wrapper for wkhtmltopdf/wkhtmltoimage for ES 2016/2017 using promises.   Downloads
+and installs the latest wkhtmtopdf lib (0.12.4) on linux.
 
-Example:
+##Installation:
 
+npm i wkhtmltox-promise
 
-转换为pdf
+##API:
 
+	pdf(source, dest, options)
+		returns Promise
 
+	image(source, dest, options)
+		returns Promise
+
+source = any valid URI
+
+dest = any valid URI
+
+options = (optional*) array of arguments passed to wkhtmltopdf / wkhtmltoimage
+> see [https://wkhtmltopdf.org/usage/wkhtmltopdf.txt] for details.
+
+##Examples:
+
+PDF
 ```javascript
-var wrapper = require("wkhtmltopdfWrapper");
+const convert = require("wkhtmltox-promise");
 
-wrapper.topdf("http://www.qq.com","./1.pdf",{
-	"page-size":"A3"
-})
+convert.pdf("http://www.google.com", "out.pdf")
+	.then(result => {
+		var stdout = result.stdout;
+        console.log('stdout: ', stdout);
+		// do something with out.pdf
+    })
+    .catch(function (err) {
+        console.error('ERROR: ', err, err.stderr);
+    });
 ```
 
-转换为image
-
+Image
 ```javascript
-var wrapper = require("wkhtmltopdfWrapper");
+const convert = require("wkhtmltox-promise");
 
-wrapper.toimage("http://www.baidu.com","./1.jpg",{
-	"quality":"90"
-})
+convert.image("http://www.google.com", "out.png")
+	.then(result => {
+		var stdout = result.stdout;
+        console.log('stdout: ', stdout);
+		// do something with out.png
+    })
+    .catch(function (err) {
+        console.error('ERROR: ', err, err.stderr);
+    });
 ```
 
 [wkhtmltopdf](http://wkhtmltopdf.org/index.html)
