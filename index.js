@@ -53,10 +53,10 @@ function convert (type, source, destination, args, ignore) {
 		let promise;
 		switch (type) {
 			case "pdf":
-				promise = pspawn(wkhtmltopdf, options, { capture: [ 'stderr' ], shell: true});
+				promise = pspawn("wkhtmltopdf", options, { capture: [ 'stderr' ], shell: true});
 				break;
 			case "image":
-				promise = pspawn(wkhtmltoimage, options, { capture: [ 'stderr' ], shell: true});
+				promise = pspawn("wkhtmltoimage", options, { capture: [ 'stderr' ], shell: true});
 				break;
 		}
 
