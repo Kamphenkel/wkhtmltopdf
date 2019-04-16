@@ -4,7 +4,6 @@
   "description": "A simple wrapper for wkhtmltopdf/wkhtmltoimage using promises",
   "main": "index.js",
   "scripts": {
-    "install": "./install.sh",
     "test": "mocha"
   },
   "repository": {
